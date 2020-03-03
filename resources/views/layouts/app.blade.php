@@ -33,7 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li><a href="{{ route('stock') }}">Stock</a></li>
+                        <li><a href="{{ route('stocktake') }}">Stock Take</a></li>
+                        <li><a href="{{ route('requests') }}">Requests</a></li>
+                        <li><a href="{{ route('manageusers') }}">Manage Users</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
