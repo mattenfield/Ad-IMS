@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    <h1> Welcome to the Amateur Dramatics Inventory Management System. </h1>
+    </br>   
+    <div class="row justify-content-center">
+      <img src="organisation.jpg" width="226px" height="140px" >
+<   </div>
+    </br>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -63,9 +69,17 @@
                                     </a>
                                 @endif
                             </div>
+                                
+                                <div style="text-align:center">
+                                </br></br>
+                                Please enter your username and password provided by your system administrator. Any queries please contact the following email address: ims@holmergreenplayers.co.uk.
+                                </div>
+                          
                         </div>
+                       
                     </form>
                 </div>
+               
             </div>
         </div>
     </div>

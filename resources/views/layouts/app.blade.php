@@ -21,37 +21,38 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-nav-def shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Ad-IMS
+                <a class="navbar-brand" href="{{ url('/dashboard') }}">
+                    <img src="logo.png" alt="Logo" width = "100px" height ="100px">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li><a href="{{ route('stock') }}">Stock</a></li>
-                        <li><a href="{{ route('stocktake') }}">Stock Take</a></li>
-                        <li><a href="{{ route('requests') }}">Requests</a></li>
-                        <li><a href="{{ route('manageusers') }}">Manage Users</a></li>
-                    </ul>
+                   
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                       <ul class="navbar-nav mr-auto">
                         @guest
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                           
+
+                        
+                        <!-- Authentication Links -->
                         @else
+                        </ul>
+                                <!-- Left Side Of Navbar -->
+                            <ul class="navbar-nav mr-auto">
+                                <li><a href="{{ route('stock') }}">Stock</a></li>
+                                <li><a href="{{ route('stocktake') }}">Stock Take</a></li>
+                                <li><a href="{{ route('requests') }}">Requests</a></li>
+                                <li><a href="{{ route('manageusers') }}">Manage Users</a></li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -69,6 +70,7 @@
                                     </form>
                                 </div>
                             </li>
+</ul>
                         @endguest
                     </ul>
                 </div>
