@@ -17,7 +17,11 @@ class StockController extends Controller
     }
     public function addstock()
     {
-        return view('addstock');
+        return view('stockadd');
+    }
+    public function newstock()
+    {
+        return view('stockadd');
     }
     public function missingstock()
     {

@@ -6,7 +6,7 @@
     </br>   
     <div class="row justify-content-center">
       <img src="organisation.jpg" width="226px" height="140px" >
-<   </div>
+    </div>
     </br>
     <div class="row justify-content-center">
         <div class="col-md-8">
