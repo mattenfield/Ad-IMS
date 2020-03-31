@@ -23,8 +23,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-nav-def shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/dashboard') }}">
-                    <img src="logo.png" alt="Logo" width = "100px" height ="100px">
+                <a class="navbar-brand" style="font-weight:bold; color: #e67300; font-size:30px" href="{{ url('/dashboard') }}">
+                    AD-IMS
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -47,10 +47,19 @@
                         </ul>
                                 <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                <li><a href="{{ route('stock') }}">Stock</a></li>
-                                <li><a href="{{ route('stocktake') }}">Stock Take</a></li>
-                                <li><a href="{{ route('requests') }}">Requests</a></li>
-                                <li><a href="{{ route('manageusers') }}">Manage Users</a></li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-nav dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Stock <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/stock/">View Items</a>
+                                    <a class="dropdown-item" href="/stock/create">Add Items</a>
+                                    <a class="dropdown-item" href="/stock/take">Stock Take</a>
+                                    <a class="dropdown-item" href="/stock/missing">Missing Items</a>
+                                </div>
+                                <li><a href="/requests">Requests</a></li>
+                                <li><a href="/manageusers">Manage Users</a></li>
                             </ul>
                             <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">

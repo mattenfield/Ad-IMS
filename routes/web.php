@@ -16,12 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::resource('stock', 'StockController');
+Route::resource('request', 'RequestController');
+Route::resource('manageusers', 'ManageUsersController');
 Route::get('/dashboard', 'HomeController@index')->name('home');
-Route::get('/stock', 'StockController@stock')->name('stock');
-Route::get('/stocktake', 'StockController@stocktake')->name('stocktake');
-Route::post('/addstock', 'StockController@addstock')->name('addstock');
-Route::get('/newstock', 'StockController@newstock')->name('newstock');
-Route::get('/missingstock', 'StockController@missingstock')->name('missingstock');
-Route::get('/requests', 'RequestsController@requests')->name('requests');
-Route::get('/manageusers', 'ManageUsersController@manageusers')->name('manageusers');
+Route::get('/stock/create', 'StockController@create')->name('stock');
+Route::get('/stock/missing', 'StockController@missing')->name('missingstock');
+Route::get('/stock/take', 'StockController@take')->name('stocktake');
+
