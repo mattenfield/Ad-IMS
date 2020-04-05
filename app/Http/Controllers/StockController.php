@@ -22,8 +22,49 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('stock');
+    {   if(isset($_GET['inventoryID']))
+        {
+            $data['id'] = $_GET['inventoryID'];
+
+            if($data['id']==1)
+            {
+                $data['selected1']="selected='selected'";
+            }
+            else if($data['id']==2)
+            {
+                $data['selected2']="selected='selected'";
+            }
+            else if($data['id']==3)
+            {
+                $data['selected3']="selected='selected'";
+            }
+            else if($data['id']==4)
+            {
+                $data['selected4']="selected='selected'";
+            }
+            else{
+
+            }
+        }
+        else{
+            $data['id'] = 0;
+            $data['selected0']="selected='selected'";
+        }
+        
+        
+
+        if($data['id'])
+        {
+            $data['items'] = Item::where('inventoryID', $data['id'])->get()->toArray();
+            return view('stock', $data);
+        }
+        else{
+           
+            $data['items'] = Item::all()->toArray();
+            return view('stock', $data);
+        }
+        
+        
     }
 
     /**
@@ -52,7 +93,7 @@ class StockController extends Controller
         $item = new Item ([
             'inventoryID' => $request->get('inventoryID'),
             'itemDescription' => $request->get('itemDescription'),
-            'itemScannedBy' => $user->id
+            'itemScannedBy' => $user->name
         ]);
         $item->save();
         return redirect()->route('stock')->with('success','Stock was successfully added');
