@@ -14,7 +14,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{url('addstock')}}">
+                    <form method="POST" action="{{url('login')}}">
                         @csrf
 
                         <div class="form-group row">

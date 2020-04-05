@@ -18,10 +18,10 @@ class Items extends Migration
         });
         Schema::table('items', function (Blueprint $table) {
             $table->string('itemDescription');
-            $table->dateTime('itemLastScanned');
+            $table->dateTime('itemLastScanned')->nullable(true);
             $table->unsignedBigInteger('itemScannedBy');
             $table->foreign('itemScannedBy')->references('id')->on('users');
-            $table->char('photoUploadLink', 100);
+            $table->char('photoUploadLink', 100)->nullable(true);
             $table->unsignedBigInteger('inventoryID');
             $table->foreign('inventoryID')->references('id')->on('inventories');
         });

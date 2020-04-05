@@ -18,12 +18,12 @@ class Requests extends Migration
             });
             Schema::table('Requests', function (Blueprint $table) {
                 $table->string('itemDescription');
-                $table->char('photoUploadLink', 100);
-                $table->unsignedBigInteger('inventoryID');
+                $table->char('photoUploadLink', 100)->nullable(true);
+                $table->unsignedBigInteger('inventoryID')->nullable(true);
                 $table->foreign('inventoryID')->references('id')->on('inventories');
                 $table->char('photoEvidenceUploadLink', 100);
                 $table->boolean('uploaded');
-                $table->boolean('approved');
+                $table->boolean('approved')->nullable(true);
             });
         }
     
