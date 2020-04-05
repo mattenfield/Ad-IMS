@@ -45,7 +45,6 @@ class StockController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'inventoryID' => 'required|numeric', 
             'itemDescription' => 'required'
             ]);
 

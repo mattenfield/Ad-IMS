@@ -15,7 +15,22 @@ class Adddefaultinventory extends Migration
     {
         DB::table('inventories')->insert(
             array(
-                'inventoryName' => 'Default Inventory'
+                'inventoryName' => 'Technical Equipment'
+            )
+        );
+        DB::table('inventories')->insert(
+            array(
+                'inventoryName' => 'Costumes'
+            )
+        );
+        DB::table('inventories')->insert(
+            array(
+                'inventoryName' => 'Tools'
+            )
+        );
+        DB::table('inventories')->insert(
+            array(
+                'inventoryName' => 'Miscellaneous'
             )
         );
     }

@@ -35,18 +35,23 @@
 
                         <div class="form-group row">
                             <label for="inventoryID" class="col-md-4 col-form-label text-md-right">{{ __('Inventory') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="inventoryID" type="text" class="form-control @error('name') is-invalid @enderror" name="inventoryID"  required>
-                            </div>
+                            
+                            <select name="inventoryID">
+                                <option value="1">Technical Equipment</option>
+                                <option value="2">Costumes</option>
+                                <option value="3">Tools</option>
+                                <option value="4">Miscellaneous</option>
+                            
+                        </select>
+                            
                         </div>
 
                         <div class="form-group row">
                             <label for="itemDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
-                            <div class="col-md-6">
+                            
                             <textarea id="itemDescription" name = "itemDescription" rows="4" cols="26" required></textarea>
-                            </div>
+                            
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
