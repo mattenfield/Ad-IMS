@@ -67,7 +67,7 @@
                 <td>{!! QrCode::size(100)->generate("".$row['id']); !!}</td>
                 <td>{{$row['id']}}</td>
                 <td>{{$row['itemDescription']}}</td>
-                <td>{{$row['itemLastScanned']}}</td>
+                <td>{{$row['itemlastScanned']}}</td>
                 <td>{{$row['itemScannedBy']}}</td>
                 <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td>
             </tr>

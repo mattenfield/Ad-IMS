@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 Auth::routes(['register' => false]);
 
+
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/stock/take', 'StockController@take')->name('stocktake');
+    Route::post('/stock/checkitem', 'StockController@checkitem')->name('checkitem');
     Route::get('/stock/search', 'StockController@search')->name('search');
     Route::get('/', function () {
         return view('dashboard');

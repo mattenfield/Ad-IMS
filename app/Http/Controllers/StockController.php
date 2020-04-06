@@ -68,6 +68,35 @@ class StockController extends Controller
         return view('stockadd');
     }
 
+    public function take()
+    {
+        
+        return view('stocktake');
+
+    }
+
+    public function checkitem(Request $request)
+    {
+        $user = auth()->user();
+        $checkitem = Item::where('id',$request->get('qrCode'))->where('inventoryID', $request->get('inventoryID'))->first();
+
+
+
+        if($checkitem==null){
+            return redirect()->route('stocktake')->with('error','Stock was not found');
+        }
+        else{
+            $checkitem->itemScannedBy = $user->name;
+            $checkitem->itemlastScanned = gmdate('Y-m-d H:i:s'); 
+            $checkitem->save();
+            return redirect()->route('stocktake')->with('success','Stock was found');
+        }
+        
+        
+    }
+
+ 
+
     public function search(Request $request)
     {
         $search = $request->get('search');
