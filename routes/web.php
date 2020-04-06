@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
-Auth::routes(['register' => false]);
 
+Auth::routes(['register' => false]);
+Route::get('/', function () {
+    return view('dashboard');
+});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/stock/take', 'StockController@take')->name('stocktake');

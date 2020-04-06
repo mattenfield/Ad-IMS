@@ -12,15 +12,15 @@
     </br>
     <div class="row justify-content-center">
             <div style="font-size: 30px; text-align:center;" class="col-sm-3">
-              <h1 style="font-size:100px;">{{$itemcount}}</h1>
+              <h1 style="font-size:100px;">{{$itemcount ?? ''}}</h1>
                 <a href="/stock">Total Items</a>
             </div>
             <div style="font-size: 30px; text-align:center;" class="col-sm-3">
-              <h1 style="font-size:100px;">{{$missingitemscount}}</h1>
+              <h1 style="font-size:100px;">{{$missingitemscount ?? ''}}</h1>
               <a href="/stock/missing">Missing Items</a>
             </div>
             <div style="font-size: 30px; text-align:center;" class="col-sm-3">
-              <h1 style="font-size:100px;">{{$requestcount}}</h1>
+              <h1 style="font-size:100px;">{{$requestcount ?? ''}}</h1>
               <a href="/requests"> Requests</a>
             </div>
 
