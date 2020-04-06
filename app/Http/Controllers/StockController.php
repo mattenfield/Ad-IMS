@@ -46,12 +46,12 @@ class StockController extends Controller
 
         if($data['id'])
         {
-            $data['items'] = Item::where('inventoryID', $data['id'])->get()->toArray();
+            $data['items'] = Item::where('inventoryID', $data['id'])->Paginate(5);
             return view('stock', $data);
         }
         else{
            
-            $data['items'] = Item::all()->toArray();
+            $data['items'] = Item::Paginate(5);
             return view('stock', $data);
         }
         
@@ -68,10 +68,10 @@ class StockController extends Controller
         return view('stockadd');
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        $search = $_GET['search'];
-        $data['items'] = Item::where('itemDescription', 'like', '%'.$search.'%')->paginate(10);
+        $search = $request->get('search');
+        $data['items'] = Item::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
         return view('stock', $data);
     }
 

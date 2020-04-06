@@ -60,6 +60,8 @@
                 <td><button class="btn-danger" href="/stock/delete/{{$row['id']}}">Delete</button></td>
             </tr>
             @endforeach
+            </table>
+            {{ $items->links() }}
         </div>
     </div>
 </div>
