@@ -49,11 +49,20 @@
                             <input type="text" id="qrCode" name = "qrCode" rows="4" cols="26" required>
                             
                         </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row mb-0 ">
+                            <div class="col-md-6 offset-md-4 justify-content-center">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}
                                 </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0 ">
+                            <div class="col-md-6 offset-md-4 justify-content-center">
+                            <br/>
+                                <a onclick="confirm('Are you sure you want to complete this Stock Take?')"class="btn btn-success" href="take/complete/">
+                                    {{ __('Complete') }}
+                                </a>
                             </div>
                         </div>
                     </form>
