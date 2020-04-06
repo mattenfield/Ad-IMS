@@ -25,7 +25,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('request', 'RequestController');
     Route::resource('manageusers', 'ManageUsersController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
-    Route::get('/stock/create', 'StockController@create')->name('stock');
+    Route::get('/stock/create', 'StockController@create')->name('stockcreate');
+    Route::get('/stock', 'StockController@index')->name('stock');
+    Route::get('/stock/delete/{id}','StockController@destroy');
+
 
    
 

@@ -94,7 +94,7 @@ class StockController extends Controller
             'itemScannedBy' => $user->name
         ]);
         $item->save();
-        return redirect()->route('stock')->with('success','Stock was successfully added');
+        return redirect()->route('stockcreate')->with('success','Stock was successfully added');
 
     }
 
@@ -140,6 +140,24 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id); 
+
+            if($item) {
+
+                $item->delete();
+                $success= true;
+
+            }
+            else{
+                $success= false;
+            }
+            
+            if($success==true)
+            {
+                return redirect()->route('stock')->with('success','Item was successfully deleted.');
+            }
+            else{
+                return redirect()->route('stock')->with('error','Failed.');
+            }
     }
 }

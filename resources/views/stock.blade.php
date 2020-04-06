@@ -4,6 +4,17 @@
 <div class="container">
     <h1>Stock</h1>
     </br>
+        @if(\Session::has('success'))
+        <div class="alert alert-success">
+            <p>{{\Session::get('success')}}</p>
+        </div>
+        @endif
+        @if(\Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{\Session::get('error')}}</p>
+        </div>
+        @endif
+
     </br>
     <div class="justify-content-center">
     <form action="{{url('stock')}}" method = "GET">
@@ -33,9 +44,8 @@
             
         </div>
     </form>
-
     <br/>
-                        
+                    
     <div class="row justify-content-center">
  
         <div class = "row">
@@ -57,7 +67,7 @@
                 <td>{{$row['itemDescription']}}</td>
                 <td>{{$row['itemLastScanned']}}</td>
                 <td>{{$row['itemScannedBy']}}</td>
-                <td><button class="btn-danger" href="/stock/delete/{{$row['id']}}">Delete</button></td>
+                <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td>
             </tr>
             @endforeach
             </table>
@@ -66,3 +76,4 @@
     </div>
 </div>
 @endsection
+
