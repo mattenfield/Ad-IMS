@@ -13,10 +13,10 @@ class MissingItems extends Migration
      */
     public function up()
     {
-        Schema::create('MissingItems', function (Blueprint $table) {
+        Schema::create('Missing_Items', function (Blueprint $table) {
             $table->bigIncrements('id');
         });
-        Schema::table('MissingItems', function (Blueprint $table) {
+        Schema::table('Missing_Items', function (Blueprint $table) {
             $table->unsignedBigInteger('itemID');
             $table->foreign('itemID')->references('id')->on('items');
         });

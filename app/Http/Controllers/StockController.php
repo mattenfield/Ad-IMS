@@ -100,6 +100,11 @@ class StockController extends Controller
         return view('stockmissing');
     }
 
+    public function missing()
+    {
+        return view('stockmissing');
+    }
+
  
 
     public function search(Request $request)

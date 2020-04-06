@@ -13,7 +13,7 @@ class ManageUsersController extends Controller
      */
     public function index()
     {
-        //
+        return(view('manageusers'));
     }
 
     /**

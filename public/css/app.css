@@ -179,13 +179,13 @@ sup {
 }
 
 a {
-  color: #3490dc;
+  color: #FF5900;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #1d68a7;
+  color: #FF5900;
   text-decoration: underline;
 }
 
@@ -399,6 +399,7 @@ h6,
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
+  color:#FF5900;
 }
 
 h1,

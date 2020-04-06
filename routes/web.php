@@ -22,11 +22,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stock/take/complete', 'StockController@completestocktake')->name('completestocktake');
     Route::post('/stock/checkitem', 'StockController@checkitem')->name('checkitem');
     Route::get('/stock/search', 'StockController@search')->name('search');
+    Route::get('/stock/missing', 'StockController@missing')->name('missingitems');
     Route::get('/', function () {
         return view('dashboard');
     });
     Route::resource('stock', 'StockController');
-    Route::resource('request', 'RequestController');
+    Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/stock/create', 'StockController@create')->name('stockcreate');
