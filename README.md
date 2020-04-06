@@ -1,4 +1,14 @@
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+
+# How to install this project 
+<p> Run project by using the PHP Artisan Development Server - the command 'php artisan serve' will do this. 
+Next you must run a MySQL Local Client - e.g. XAMPP. Once both of these are running correctly, you should now be able to serve the application. The default credentials are below:
+
+## You must change these credentials upon first log-in BEFORE deployment. 
+User: superuser@adims.com <br/>
+Password: changeme!
+</p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
