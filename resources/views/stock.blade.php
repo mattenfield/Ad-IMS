@@ -54,6 +54,7 @@
         <table class="table table-bordered">
         <tr>
             <th> Select </th>
+            <th> QR Code </th>
             <th> ID </th>
             <th> Description </th>
             <th> Last Scanned </th>
@@ -63,6 +64,7 @@
             @foreach($items as $row)
             <tr>
                 <td><input type="checkbox" id="{{$row['id']}}" name="{{$row['id']}}" value="{{$row['id']}}" ></td>
+                <td>{!! QrCode::size(100)->generate("".$row['id']); !!}</td>
                 <td>{{$row['id']}}</td>
                 <td>{{$row['itemDescription']}}</td>
                 <td>{{$row['itemLastScanned']}}</td>
