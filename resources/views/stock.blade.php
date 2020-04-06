@@ -3,7 +3,9 @@
 @section('content')
 <div class="container">
     <h1>Stock</h1>
-    </br></br>
+    </br>
+    </br>
+    <div class="justify-content-center">
     <form action="{{url('stock')}}" method = "GET">
     <div class="form-group row">
                             <label for="inventoryID" class="col-md-4 col-form-label text-md-right">{{ __('Inventory') }}</label>
@@ -13,14 +15,26 @@
                                 <option <?=$selected2 ?? ''?>value="2">Costumes</option>
                                 <option <?=$selected3 ?? ''?>value="3">Tools</option>
                                 <option <?=$selected4 ?? ''?>value="4">Miscellaneous</option>
-                            
                         </select>
                         <button type="submit" style="margin:5px" class="btn btn-primary">
                                     {{ __('Load') }}
-                                </button>
+                        </button>
     </form>
                             
-                        </div>
+    </div>
+    </div>
+</br>
+    <form action="/stock/search" method="GET">
+        <div class="row justify-content-center">
+            <input type="search" style="margin:5px; width:500px" name="search" placeholder ="Search Inventory" class="form-control">
+           
+                <button type = "submit" style="" class = "btn btn-primary justify-content-center"> Search </button>
+            </span>
+            
+        </div>
+    </form>
+
+    <br/>
                         
     <div class="row justify-content-center">
  
