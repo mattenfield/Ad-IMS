@@ -7,15 +7,6 @@ use App\Item;
 
 class StockController extends Controller
 {
-    public function take()
-    {   
-        return view('stocktake');
-    }
-
-    public function missing()
-    {
-        return view('stockmissing');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -75,6 +66,13 @@ class StockController extends Controller
     public function create()
     {
         return view('stockadd');
+    }
+
+    public function search()
+    {
+        $search = $_GET['search'];
+        $data['items'] = Item::where('itemDescription', 'like', '%'.$search.'%')->paginate(10);
+        return view('stock', $data);
     }
 
     /**

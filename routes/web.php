@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('auth/login');
 });
 Auth::routes(['register' => false]);
+
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/stock/search', 'StockController@search')->name('search');
     Route::get('/', function () {
         return view('dashboard');
     });
@@ -24,8 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('manageusers', 'ManageUsersController');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/stock/create', 'StockController@create')->name('stock');
-    Route::get('/stock/missing', 'StockController@missing')->name('missingstock');
-    Route::get('/stock/take', 'StockController@take')->name('stocktake');
+
+   
 
 });
 

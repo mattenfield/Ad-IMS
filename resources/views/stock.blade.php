@@ -24,7 +24,7 @@
     </div>
     </div>
 </br>
-    <form action="/stock/search" method="GET">
+    <form action="/stock/search" method="get">
         <div class="row justify-content-center">
             <input type="search" style="margin:5px; width:500px" name="search" placeholder ="Search Inventory" class="form-control">
            
