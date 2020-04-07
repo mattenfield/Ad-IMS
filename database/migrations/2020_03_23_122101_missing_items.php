@@ -17,8 +17,9 @@ class MissingItems extends Migration
             $table->bigIncrements('id');
         });
         Schema::table('Missing_Items', function (Blueprint $table) {
-            $table->unsignedBigInteger('itemID');
-            $table->foreign('itemID')->references('id')->on('items');
+            $table->string('itemDescription');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
         });
     }
 

@@ -24,6 +24,8 @@ class Requests extends Migration
                 $table->char('photoEvidenceUploadLink', 100);
                 $table->boolean('uploaded');
                 $table->boolean('approved')->nullable(true);
+                $table->dateTime('updated_at');
+                $table->dateTime('created_at');
             });
         }
     

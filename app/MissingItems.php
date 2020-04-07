@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MissingItems extends Model
 {
-    protected $fillable = ['itemID'];
+    protected $fillable = ['id','itemDescription'];
 }

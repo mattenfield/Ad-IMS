@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use App\MissingItems;
 
 class StockController extends Controller
 {
@@ -48,13 +49,14 @@ class StockController extends Controller
         {
             $data['items'] = Item::where('inventoryID', $data['id'])->Paginate(5);
             return view('stock', $data);
+            
         }
         else{
            
             $data['items'] = Item::Paginate(5);
             return view('stock', $data);
         }
-        
+       
         
     }
 
@@ -87,7 +89,7 @@ class StockController extends Controller
         }
         else{
             $checkitem->itemScannedBy = $user->name;
-            $checkitem->itemlastScanned = gmdate('Y-m-d H:i:s'); 
+            $checkitem->itemlastScanned = gmdate('Y-m-d'); 
             $checkitem->save();
             return redirect()->route('stocktake')->with('success','Stock was found');
         }
@@ -97,12 +99,45 @@ class StockController extends Controller
 
     public function completestocktake(Request $request)
     {
-        return view('stockmissing');
+        
+        $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->Paginate(5);
+
+        if(count($data['missingitems'])>0){
+            
+            $check=array();
+
+            foreach($data['missingitems'] as $m)
+            {
+                $check = MissingItems::where('id', $m['id'])->Paginate(5);
+            }
+        
+            if(count($check)>0)
+            {
+                return view('stockmissing', $data);
+            }
+            else{
+                foreach ($data['missingitems'] as $m){
+                    $newmissingitems = new MissingItems ([
+            
+                        'id' => $m['id'],
+                        'itemDescription' => $m['itemDescription']
+                    ]);
+                    $newmissingitems->save();
+                    }
+                    return view('stockmissing', $data);
+            }
+      
+        }
+        else{
+            return redirect()->route('stocktake')->with('success','There were no items left to find.');
+        }
+
+
     }
 
     public function missing()
-    {
-        return view('stockmissing');
+    {    $data['missingitems'] = MissingItems::Paginate(5);
+         return view('stockmissing', $data);
     }
 
  
