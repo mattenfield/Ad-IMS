@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/stock/create', 'StockController@create')->name('stockcreate');
     Route::get('/stock', 'StockController@index')->name('stock');
+    Route::get('/stock/found/{id}','StockController@found');
     Route::get('/stock/delete/{id}','StockController@destroy');
 
 

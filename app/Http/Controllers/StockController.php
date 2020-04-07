@@ -140,6 +140,41 @@ class StockController extends Controller
          return view('stockmissing', $data);
     }
 
+    public function found($id)
+    {   $user = auth()->user();
+        $item = MissingItems::find($id); 
+
+        if($item) {
+
+            $item->delete();
+            $success= true;
+
+        }
+        else{
+            $success= false;
+        }
+        
+        if($success==true)
+        {
+            $checkitem = Item::where('id', $id)->first();
+
+            if($checkitem)
+            {
+                $checkitem->itemScannedBy = $user->name;
+                $checkitem->itemlastScanned = gmdate('Y-m-d'); 
+                $checkitem->save();
+                return redirect()->route('missingitems')->with('success','Stock was marked as found.');
+            }
+            else{
+                return redirect()->route('missingitems')->with('error','Unfortunately an error has occurred.');
+            }
+            
+        }
+        else{
+            return redirect()->route('stock')->with('error','Unfortunately an error has occurred.');
+        }
+    }
+
  
 
     public function search(Request $request)

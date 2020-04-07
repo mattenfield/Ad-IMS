@@ -34,7 +34,7 @@
      <tr>
          <td>{{$row['id']}}</td>
          <td>{{$row['itemDescription']}}</td>
-         <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you have found this?')" href="/stock/delete/{{$row['id']}}">Found</a></td>
+         <td><a class="btn btn-success delete" onclick="return confirm('Are you sure you have found this?')" href="/stock/found/{{$row['id']}}">Found</a></td>
      </tr>
      @endforeach
      </table>
