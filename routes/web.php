@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/stock/take', 'StockController@take')->name('stocktake');
+    Route::post('/stock/take/complete', 'StockController@completestocktake')->name('completestocktake');
     Route::get('/stock/take/complete', 'StockController@completestocktake')->name('completestocktake');
     Route::post('/stock/checkitem', 'StockController@checkitem')->name('checkitem');
     Route::get('/stock/search', 'StockController@search')->name('search');

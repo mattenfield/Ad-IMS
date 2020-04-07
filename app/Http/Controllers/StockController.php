@@ -80,7 +80,7 @@ class StockController extends Controller
     public function checkitem(Request $request)
     {
         $user = auth()->user();
-        $checkitem = Item::where('id',$request->get('qrCode'))->where('inventoryID', $request->get('inventoryID'))->first();
+        $checkitem = Item::where('id',$request->get('qrCode'))->first();
 
 
 
@@ -100,7 +100,7 @@ class StockController extends Controller
     public function completestocktake(Request $request)
     {
         
-        $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->Paginate(5);
+        $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID',$request->get('inventoryID'))->Paginate(5);
 
         if(count($data['missingitems'])>0){
             
