@@ -20,10 +20,12 @@
         
         <div class="col-md-8">
         <div class="row justify-content-center">
- 
+        <h5 style="text-align:center;">{{$alertmessage}}</h5>
+        
  <div class = "row">
  <br/>
  <div class="col-md-12">
+ <br/><br/>
  <table class="table table-bordered">
  <tr>
      <th> ID </th>

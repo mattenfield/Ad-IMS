@@ -101,6 +101,7 @@ class StockController extends Controller
     {
         
         $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID',$request->get('inventoryID'))->Paginate(5);
+        $data['alertmessage'] = "These are the missing items from the stock check you have just completed, if found - press the found button on the corresponding items.";
 
         if(count($data['missingitems'])>0){
             
@@ -136,7 +137,9 @@ class StockController extends Controller
     }
 
     public function missing()
-    {    $data['missingitems'] = MissingItems::Paginate(5);
+    {    
+        $data['alertmessage'] = "These are the missing items from all stock checks carried out, if found - press the found button on the corresponding items.";
+        $data['missingitems'] = MissingItems::Paginate(5);
          return view('stockmissing', $data);
     }
 
