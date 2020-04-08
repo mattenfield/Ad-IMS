@@ -96,6 +96,26 @@ class StockController extends Controller
         
         
     }
+    public function mobiletake($id)
+    {
+        if($id==null)
+        {
+            return redirect()->route('stock')->with('error','You have not scanned an item.');
+        }
+        $user = auth()->user();
+        $checkitem = Item::where('id',$id)->first();
+
+        if($checkitem==null){
+            return redirect()->route('stocktake')->with('error','Stock was not found');
+        }
+        else{
+            $checkitem->itemScannedBy = $user->name;
+            $checkitem->itemlastScanned = gmdate('Y-m-d'); 
+            $checkitem->save();
+            return redirect()->route('stocktake')->with('success','Stock was found');
+        
+            }
+}
 
     public function completestocktake(Request $request)
     {

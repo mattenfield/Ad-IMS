@@ -66,7 +66,7 @@
             @foreach($items as $row)
             <tr> 
                 <td><input type="checkbox" name="printcheck[]" value="{{$row['id']}}" ></td>
-                <td>{!! QrCode::size(100)->generate("".$row['id']); !!}</td>
+                <td>{!! QrCode::size(100)->generate("".url('stock/mobiletake')."/".$row['id']); !!}</td>
                 <td>{{$row['id']}}</td>
                 <td>{{$row['itemDescription']}}<input type ="hidden" name="description[]" value="{{$row['itemDescription']}}"></td>
                 <td>{{$row['itemLastScanned']}}</td>
@@ -79,6 +79,7 @@
             <button type="submit" style="margin:5px" class="btn btn-primary">
                 {{ __('Print Selected') }}
             </button>
+            
             <a href="/stock/printall" style="margin:5px" class="btn btn-primary">
                 {{ __('Print All') }}
             </a>
