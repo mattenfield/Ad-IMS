@@ -51,6 +51,7 @@
         <div class = "row">
         <br/>
         <div class="col-md-12">
+        <form action="{{url('stock/print')}}" method="post">
         <table class="table table-bordered">
         <tr>
             <th> Select </th>
@@ -61,12 +62,13 @@
             <th> Scanned By</th>
             <th> Actions </th>
         </tr>
+            @csrf
             @foreach($items as $row)
-            <tr>
-                <td><input type="checkbox" id="{{$row['id']}}" name="{{$row['id']}}" value="{{$row['id']}}" ></td>
+            <tr> 
+                <td><input type="checkbox" name="printcheck[]" value="{{$row['id']}}" ></td>
                 <td>{!! QrCode::size(100)->generate("".$row['id']); !!}</td>
                 <td>{{$row['id']}}</td>
-                <td>{{$row['itemDescription']}}</td>
+                <td>{{$row['itemDescription']}}<input type ="hidden" name="description[]" value="{{$row['itemDescription']}}"></td>
                 <td>{{$row['itemLastScanned']}}</td>
                 <td>{{$row['itemScannedBy']}}</td>
                 <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td>
@@ -74,7 +76,15 @@
             @endforeach
             </table>
             {{ $items->links() }}
+            <button type="submit" style="margin:5px" class="btn btn-primary">
+                {{ __('Print Selected') }}
+            </button>
+            <a href="/stock/printall" style="margin:5px" class="btn btn-primary">
+                {{ __('Print All') }}
+            </a>
+            </form>
         </div>
+        
     </div>
 </div>
 @endsection

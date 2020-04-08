@@ -209,6 +209,38 @@ class StockController extends Controller
         return redirect()->route('stockcreate')->with('success','Stock was successfully added');
 
     }
+    public function print(Request $request)
+    {   
+        $data['items'] = $request->get('printcheck');
+        if($data['items']!=null)
+        {
+            return view('stockprint', $data);
+        }
+        else{
+            return redirect()->route('stock')->with('error','You have not selected anything to print.');
+        }
+        
+    }
+
+    public function printall()
+    {   
+        $i=0;
+        $ids = Item::select('id')->get();
+        if($ids)
+        {
+            foreach($ids as $id)
+        {
+            $data['items'][$i] = $id['id'];
+            $i++;
+        }
+        return view('stockprint', $data);
+        }
+        else
+        {
+            return redirect()->route('stock')->with('error','Nothing to print.');
+        }
+        
+    }
 
     /**
      * Display the specified resource.
