@@ -34,9 +34,6 @@ class StockController extends Controller
             {
                 $data['selected4']="selected='selected'";
             }
-            else{
-
-            }
         }
         else{
             $data['id'] = 0;

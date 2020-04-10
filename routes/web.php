@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('/stock/take', 'StockController@take')->name('stocktake');
     Route::get('/stock/mobiletake/{id}', 'StockController@mobiletake')->name('mobilestocktake');
     Route::post('/stock/print', 'StockController@print')->name('stockprint');
@@ -34,6 +35,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('stock', 'StockController');
     Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');
+    Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
+    Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
+    Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');
+    Route::post('manageusers/edit/{id}', 'ManageUsersController@edit');
+    Route::post('manageusers/edit/update/{id}', 'ManageUsersController@update');
+    Route::get('manageusers/delete/{id}', 'ManageUsersController@destroy');
+    Route::post('manageusers/create/new', 'ManageUsersController@store')->name('register');
     Route::get('/dashboard', 'HomeController@index')->name('home');
     Route::get('/stock/create', 'StockController@create')->name('stockcreate');
     Route::get('/stock', 'StockController@index')->name('stock');
