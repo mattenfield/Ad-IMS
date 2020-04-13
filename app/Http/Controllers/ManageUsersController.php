@@ -110,10 +110,10 @@ class ManageUsersController extends Controller
 
     public function changepassword()
     {
-        return view('mypwdchange');
+        return view('auth/mypwdchange');
     }
 
-    public function changepasswordstore()
+    public function changepasswordstore(request $request)
     {   $currentuser = auth()->user();
         if($currentuser)
         {

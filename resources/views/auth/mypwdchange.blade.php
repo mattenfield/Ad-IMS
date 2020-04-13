@@ -2,13 +2,23 @@
 
 @section('content')
 <div class="container">
+@if(\Session::has('success'))
+        <div class="alert alert-success">
+            <p>{{\Session::get('success')}}</p>
+        </div>
+        @endif
+        @if(\Session::has('error'))
+        <div class="alert alert-danger">
+            <p>{{\Session::get('error')}}</p>
+        </div>
+        @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Change Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('manageusers/edit/update').'/'.$user['id']}}">
+                    <form method="POST" action="{{url('changepassword/store')}}">
                         @csrf
 
                         <div class="form-group row">

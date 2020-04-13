@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/changepassword', 'ManageUsersController@changepassword')->name('changepwd');
+    Route::post('/changepassword/store', 'ManageUsersController@changepasswordstore')->name('changepwdstore');
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('/stock/take', 'StockController@take')->name('stocktake');
     Route::get('/stock/mobiletake/{id}', 'StockController@mobiletake')->name('mobilestocktake');
