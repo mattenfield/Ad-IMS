@@ -106,8 +106,29 @@ class ManageUsersController extends Controller
             return redirect()->route('manageusers')->with('error','You cannot edit your own account in this section.');
         }
         
-        
     }
+
+    public function changepassword()
+    {
+        return view('mypwdchange');
+    }
+
+    public function changepasswordstore()
+    {   $currentuser = auth()->user();
+        if($currentuser)
+        {
+            $user = User::where('id', $currentuser->id)->first();
+            $this->validate($request, ['password' => ['required', 'string', 'min:8', 'confirmed']]);
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+            return redirect()->route('changepwd')->with('success','Password was successfully changed.');
+        }
+        else
+        {
+            return redirect()->route('changepwd')->with('error','Failed.');
+        }  
+    }
+
 
     /**
      * Update the specified resource in storage.
