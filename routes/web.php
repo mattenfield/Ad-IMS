@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard');
     });
     Route::resource('stock', 'StockController');
-    Route::resource('requests', 'RequestsController');
+    // Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');
     Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');

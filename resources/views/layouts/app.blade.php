@@ -58,7 +58,7 @@
                                     <a class="dropdown-item" href="/stock/take">Stock Take</a>
                                     <a class="dropdown-item" href="/stock/missing">Missing Items</a>
                                 </div>
-                                <li><a href="/requests">Requests</a></li>
+                                <!-- <li><a href="/requests">Requests</a></li> -->
                                 <li><a href="/manageusers">Manage Users</a></li>
                             </ul>
                             <ul class="navbar-nav ml-auto">
