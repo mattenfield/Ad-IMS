@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Requests;
 
 class RequestsController extends Controller
 {
@@ -36,17 +37,24 @@ class RequestsController extends Controller
     {
         $this->validate($request, [
             'itemDescription' => 'required',
-            'select_file' => 'requred|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'select_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
+        
+        $image = $request->file('select_file');
+        $new_name = rand().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path("images"), $new_name);
 
-        // $user = auth()->user();
-        // $item = new Item ([
-        //     'inventoryID' => $request->get('inventoryID'),
-        //     'itemDescription' => $request->get('itemDescription'),
-        //     'itemScannedBy' => $user->name
-        // ]);
-        // $item->save();
-        // return redirect()->route('stockcreate')->with('success','Stock was successfully added');
+        $user = auth()->user();
+        $request = new Requests ([
+            'inventoryID' => $request->get('inventoryID'),
+            'itemDescription' => $request->get('itemDescription'),
+            'photoEvidenceUploadLink' => $new_name,
+            'uploaded' => true,
+            'requestbyname' => $user->name,
+            'requestbyID' => $user->id,
+        ]);
+        $request->save();
+        return redirect()->route('requests')->with('success','Request successfully generated.');
     }
 
     /**

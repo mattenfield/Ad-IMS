@@ -30,7 +30,7 @@
                 <div class="card-header">{{ __('Create New Request') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{url('stock')}}">
+                    <form method="POST" action="{{url('requests/create')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

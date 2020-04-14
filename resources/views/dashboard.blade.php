@@ -19,9 +19,9 @@
               <h1 style="font-size:100px;">{{$missingitemscount ?? ''}}</h1>
               <a href="/stock/missing">Missing Items</a>
             </div>
-            <!-- <div style="font-size: 30px; text-align:center;" class="col-sm-3">
+            <div style="font-size: 30px; text-align:center;" class="col-sm-3">
               <h1 style="font-size:100px;">{{$requestcount ?? ''}}</h1>
               <a href="/requests"> Requests</a>
-            </div> -->
+            </div>
 
 @endsection

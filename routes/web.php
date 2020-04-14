@@ -12,10 +12,12 @@
 */
 
 
-Auth::routes(['register' => false]);
 Route::get('/', function () {
     return view('dashboard');
 });
+
+
+Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/changepassword', 'ManageUsersController@changepassword')->name('changepwd');
@@ -37,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('stock', 'StockController');
     Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');
+    Route::get('/requests/create', 'RequestsController@create')->name('requests');
+    Route::post('/requests/create', 'RequestsController@store');
     Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');
