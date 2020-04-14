@@ -22,8 +22,8 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        return(view('requestsadd'));
     }
 
     /**
@@ -34,7 +34,19 @@ class RequestsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'itemDescription' => 'required',
+            'select_file' => 'requred|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+        // $user = auth()->user();
+        // $item = new Item ([
+        //     'inventoryID' => $request->get('inventoryID'),
+        //     'itemDescription' => $request->get('itemDescription'),
+        //     'itemScannedBy' => $user->name
+        // ]);
+        // $item->save();
+        // return redirect()->route('stockcreate')->with('success','Stock was successfully added');
     }
 
     /**
