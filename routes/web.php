@@ -34,8 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('stock', 'StockController');
     Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');
+    Route::get('/requests', 'RequestsController@index')->name('requestsview');
     Route::get('/requests/create', 'RequestsController@create')->name('requests');
     Route::post('/requests/create', 'RequestsController@store');
+    Route::get('/requests/approve/{id}', 'RequestsController@approve')->name('approverequest');
+    Route::get('/requests/delete/{id}', 'RequestsController@destroy')->name('deleterequest');
     Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');

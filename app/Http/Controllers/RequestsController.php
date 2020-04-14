@@ -99,6 +99,14 @@ class RequestsController extends Controller
         return view('requests', $data);
     }
 
+    public function approve($id)
+    {
+        $approvereq = Requests::where('id',$id)->first();
+        $approvereq->approved = 1;
+        $approvereq->save();
+        return redirect()->route('requests')->with('success','Request successfully approved.');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -130,6 +138,24 @@ class RequestsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delrequest = Requests::find($id); 
+
+            if($delrequest) {
+
+                $delrequest->delete();
+                $success= true;
+
+            }
+            else{
+                $success= false;
+            }
+            
+            if($success==true)
+            {
+                return redirect()->route('requestsview')->with('success','Request was successfully deleted.');
+            }
+            else{
+                return redirect()->route('requestsview')->with('error','Failed.');
+            }
     }
 }
