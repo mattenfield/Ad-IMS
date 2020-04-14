@@ -13,8 +13,32 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return(view('requests'));
+    {    if(isset($_GET['approval']))
+         {
+            $data['approve'] = $_GET['approval'];
+            if($data['approve']==0)
+            {
+                $data['selected0']="selected='selected'";
+                $data['requests'] = Requests::Paginate(5);
+            }
+            else if($data['approve']==1)
+            {
+                $data['selected1']="selected='selected'";
+                $data['requests'] = Requests::where('approved', null)->Paginate(5);
+            }
+            else if($data['approve']==2)
+            {
+                $data['selected2']="selected='selected'";
+                $data['requests'] = Requests::where('approved', 1)->Paginate(5);
+            }
+         }
+        else{
+            
+            $data['selected0']="selected='selected'";
+            $data['requests'] = Requests::Paginate(5);
+        }
+        
+        return view('requests', $data);
     }
 
     /**
