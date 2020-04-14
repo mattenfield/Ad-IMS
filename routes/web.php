@@ -11,12 +11,6 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('dashboard');
-});
-
-
 Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function () {
@@ -34,8 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stock/search', 'StockController@search')->name('search');
     Route::get('/stock/missing', 'StockController@missing')->name('missingitems');
     Route::get('/', function () {
-        return view('dashboard');
+        return redirect()->route('home');
     });
+    Route::get('/requests/search/', 'RequestsController@search')->name('searchrequests');
     Route::resource('stock', 'StockController');
     Route::resource('requests', 'RequestsController');
     Route::resource('manageusers', 'ManageUsersController');

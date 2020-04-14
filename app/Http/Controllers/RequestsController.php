@@ -92,6 +92,13 @@ class RequestsController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $data['requests'] = Requests::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
+        return view('requests', $data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
