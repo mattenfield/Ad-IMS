@@ -116,11 +116,13 @@ class StockController extends Controller
 
     public function completestocktake(Request $request)
     {
-        
-        $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID',$request->get('inventoryID'))->Paginate(5);
+        $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID', $request->get('inventoryID'))->get();
+        define('constantID', $request->get('inventoryID'));
+        $data['missingitemscount'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID', constantID)->count();
         $data['alertmessage'] = "These are the missing items from the stock check you have just completed, if found - press the found button on the corresponding items.";
-
-        if(count($data['missingitems'])>0){
+        $data['linkcheck'] = 1;
+   
+        if($data['missingitemscount']>0){
             
             $check=array();
 
@@ -146,8 +148,8 @@ class StockController extends Controller
             }
       
         }
-        else{
-            return redirect()->route('stocktake')->with('success','There were no items left to find.');
+        else if ($data['missingitemscount']==0){
+            return redirect()->route('stocktake')->with('success', $temp);
         }
 
 

@@ -40,7 +40,9 @@
      </tr>
      @endforeach
      </table>
+     @if(!isset($linkcheck))
      {{ $missingitems->links() }}
+     @endif
  </div>
 </div>
         </div>
