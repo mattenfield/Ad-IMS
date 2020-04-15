@@ -14,7 +14,8 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   if(isset($_GET['inventoryID']))
+    {   $data['auth_level'] = auth()->user()->user_level;
+        if(isset($_GET['inventoryID']))
         {
             $data['id'] = $_GET['inventoryID'];
 
@@ -198,7 +199,7 @@ class StockController extends Controller
  
 
     public function search(Request $request)
-    {
+    {   $data['auth_level'] = auth()->user()->user_level;
         $search = $request->get('search');
         $data['items'] = Item::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
         return view('stock', $data);

@@ -14,29 +14,63 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    if(isset($_GET['approval']))
+    {   $data['auth_level'] = auth()->user()->user_level; 
+        if(isset($_GET['approval'])&&$data['auth_level']==1)
          {
             $data['approve'] = $_GET['approval'];
+                if($data['approve']==0)
+                {
+                    $data['selected0']="selected='selected'";
+                    $data['requests'] = Requests::Paginate(5);
+                }
+                else if($data['approve']==1)
+                {
+                    $data['selected1']="selected='selected'";
+                    $data['requests'] = Requests::where('approved', null)->Paginate(5);
+                }
+                else if($data['approve']==2)
+                {
+                    $data['selected2']="selected='selected'";
+                    $data['requests'] = Requests::where('approved', 1)->Paginate(5);
+                }
+                else
+                {
+                    $data['selected0']="selected='selected'";
+                    $data['requests'] = Requests::Paginate(5);
+                }
+        }
+        else if(isset($_GET['approval'])&&$data['auth_level']==0)
+        {
             if($data['approve']==0)
             {
                 $data['selected0']="selected='selected'";
-                $data['requests'] = Requests::Paginate(5);
+                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->Paginate(5);
             }
             else if($data['approve']==1)
             {
                 $data['selected1']="selected='selected'";
-                $data['requests'] = Requests::where('approved', null)->Paginate(5);
+                $data['requests'] = Requests::where('approved', null)->where('requestbyID', auth()->user()->id)->Paginate(5);
             }
             else if($data['approve']==2)
             {
                 $data['selected2']="selected='selected'";
-                $data['requests'] = Requests::where('approved', 1)->Paginate(5);
+                $data['requests'] = Requests::where('approved', 1)->where('requestbyID', auth()->user()->id)->Paginate(5);
             }
-         }
-        else{
-            
+            else
+            {
+                $data['selected0']="selected='selected'";
+                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->Paginate(5);
+            }
+        }
+        else if(!isset($_GET['approval'])&&$data['auth_level']==1)
+        {
             $data['selected0']="selected='selected'";
             $data['requests'] = Requests::Paginate(5);
+        }
+        else if(!isset($_GET['approval'])&&$data['auth_level']==0)
+        {
+            $data['selected0']="selected='selected'";
+            $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->Paginate(5);
         }
         
         return view('requests', $data);
@@ -102,9 +136,18 @@ class RequestsController extends Controller
     }
 
     public function search(Request $request)
-    {
+    {   $data['auth_level'] = auth()->user()->user_level;
         $search = $request->get('search');
-        $data['requests'] = Requests::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
+
+        if($data['auth_level']==1)
+        {
+            $data['requests'] = Requests::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
+        }
+        else
+        {
+            $data['requests'] = Requests::where('itemDescription', 'like', '%'.$search.'%')->where('requestbyID', auth()->user()->id)->Paginate(5);
+        }
+       
         return view('requests', $data);
     }
 
@@ -160,25 +203,27 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $delrequest = Requests::find($id); 
+    {   $user = auth()->user();
 
-            if($delrequest) {
+        if($user->user_level==1)
+        {
+            $delrequest = Requests::find($id);
+        }
+        else
+        {
+            $delrequest = Requests::where('id', $id)->where('requestbyID', $user->id)->first();
+        }
+         
+            if(!isset($delrequest)){
 
+                return redirect()->route('requestsview')->with('error','Failed to delete item.');
+
+            }
+            else
+            {   
                 $delrequest->delete();
-                $success= true;
-
-            }
-            else{
-                $success= false;
-            }
-            
-            if($success==true)
-            {
                 return redirect()->route('requestsview')->with('success','Request was successfully deleted.');
             }
-            else{
-                return redirect()->route('requestsview')->with('error','Failed.');
-            }
+            
     }
 }

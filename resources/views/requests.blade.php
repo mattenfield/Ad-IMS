@@ -56,6 +56,7 @@
             <th> Inventory </th>
             <th> Request Time </th>
             <th> Request By </th>
+            <th> Status </th>
             <th> Actions </th>
         </tr>
             @csrf
@@ -80,6 +81,14 @@
             else{
                 $inventory = "Not for Upload.";
             }
+
+            if($row['approved']==1)
+            {
+                $approval = "Approved";
+            }
+            else{
+                $approval = "Pending";
+            }
             ?>
             <tr> 
                 <td><img style = "max-width: 500px; max-height: 500px;" src="/images/{{$row['photoEvidenceUploadLink']}}" alt="Evidence Image not found." ></td>
@@ -87,7 +96,8 @@
                 <td><?=$inventory?></td>
                 <td>{{$row['created_at']}}</td>
                 <td>{{$row['requestbyname']}}</td>
-                <td>@if(@$row['approved']==null)<a class="btn btn-success" onclick="return confirm('Are you sure you wish to approve this?')" href="/requests/approve/{{$row['id']}}">Approve</a>@endif
+                <td><?=$approval?></td>
+                <td>@if(@$row['approved']==null&&@$auth_level==1)<a class="btn btn-success" onclick="return confirm('Are you sure you wish to approve this?')" href="/requests/approve/{{$row['id']}}">Approve</a>@endif
                 <a style="margin:5px;" class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/requests/delete/{{$row['id']}}">Delete</a></td>
             </tr>
             @endforeach

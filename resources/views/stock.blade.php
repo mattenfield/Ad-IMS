@@ -54,28 +54,29 @@
         <form action="{{url('stock/print')}}" method="post">
         <table class="table table-bordered">
         <tr>
-            <th> Select </th>
+        @if($auth_level==1) <th> Select </th> @endif
             <th> QR Code </th>
             <th> ID </th>
             <th> Description </th>
             <th> Last Scanned </th>
             <th> Scanned By</th>
-            <th> Actions </th>
+            @if($auth_level==1) <th> Actions </th> @endif
         </tr>
             @csrf
             @foreach($items as $row)
             <tr> 
-                <td><input type="checkbox" name="printcheck[]" value="{{$row['id']}}" ></td>
+            @if($auth_level==1) <td><input type="checkbox" name="printcheck[]" value="{{$row['id']}}" ></td> @endif
                 <td>{!! QrCode::size(100)->generate("".url('stock/mobiletake')."/".$row['id']); !!}</td>
                 <td>{{$row['id']}}</td>
                 <td>{{$row['itemDescription']}}<input type ="hidden" name="description[]" value="{{$row['itemDescription']}}"></td>
                 <td>{{$row['itemLastScanned']}}</td>
                 <td>{{$row['itemScannedBy']}}</td>
-                <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td>
+            @if($auth_level==1)    <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td> @endif
             </tr>
             @endforeach
             </table>
             {{ $items->links() }}
+            @if($auth_level==1)
             <button type="submit" style="margin:5px" class="btn btn-primary">
                 {{ __('Print Selected') }}
             </button>
@@ -84,6 +85,7 @@
                 {{ __('Print All') }}
             </a>
             </form>
+            @endif
         </div>
         
     </div>
