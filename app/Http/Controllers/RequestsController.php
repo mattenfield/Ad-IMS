@@ -59,6 +59,14 @@ class RequestsController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->get('inventoryID')==0)
+        {
+            $invID = null;
+        }
+        else
+        {
+            $invID = $request->get('inventoryID');
+        }
         $this->validate($request, [
             'itemDescription' => 'required',
             'select_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -70,7 +78,7 @@ class RequestsController extends Controller
 
         $user = auth()->user();
         $request = new Requests ([
-            'inventoryID' => $request->get('inventoryID'),
+            'inventoryID' => $invID,
             'itemDescription' => $request->get('itemDescription'),
             'photoEvidenceUploadLink' => $new_name,
             'uploaded' => true,
