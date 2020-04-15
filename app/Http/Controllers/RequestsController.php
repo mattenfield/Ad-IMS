@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Requests;
+use App\Item;
 
 class RequestsController extends Controller
 {
@@ -112,7 +113,21 @@ class RequestsController extends Controller
         $approvereq = Requests::where('id',$id)->first();
         $approvereq->approved = 1;
         $approvereq->save();
-        return redirect()->route('requests')->with('success','Request successfully approved.');
+
+        if($approvereq->inventoryID !=null)
+        {
+            $user = auth()->user();
+            $item = new Item ([
+            'inventoryID' => $approvereq->inventoryID,
+            'itemDescription' => $approvereq->itemDescription,
+            'itemScannedBy' => $user->name
+            ]);
+            $item->save();
+            return redirect()->route('requestsview')->with('success','Request successfully approved and uploaded to Inventory.');
+        }
+        else{
+            return redirect()->route('requestsview')->with('success','Request successfully approved.');
+        }
     }
 
     /**
