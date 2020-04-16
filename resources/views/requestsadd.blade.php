@@ -24,7 +24,7 @@
     <div class="row justify-content-center">
       
         <div class="col-md-8">
-        <div class="row justify-content-center">
+        <div style="text-align:center;" class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Create New Request') }}</div>
@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <label for="inventoryID" class="col-md-4 col-form-label text-md-right">{{ __('Inventory') }}</label>
                             
-                            <select name="inventoryID">
+                            <select style="margin : 0 auto;" name="inventoryID">
                                 <option value="0">Do not add</option>
                                 <option value="1">Technical Equipment</option>
                                 <option value="2">Costumes</option>
@@ -51,14 +51,14 @@
                             <label for="itemDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             
-                            <textarea id="itemDescription" name = "itemDescription" placeholder = "Please enter the description of the item." rows="4" cols="26" required></textarea>
+                            <textarea style="margin : 0 auto;" id="itemDescription" name = "itemDescription" placeholder = "Please enter the description of the item." rows="4" cols="26" required></textarea>
                             
                         </div>
                         <div class="form-group row">
                             <label for="select_file" class="col-md-4 col-form-label text-md-right">{{ __('Upload Evidence') }}</label>
 
                             
-                            <input type="file" name = "select_file" required>
+                            <input style="margin : 0 auto;" type="file" name = "select_file" required>
                             
                         </div>
                         <div class="form-group row mb-0">
