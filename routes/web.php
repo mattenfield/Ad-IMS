@@ -24,6 +24,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/stock/missing', 'StockController@missing')->name('missingitems');
     Route::resource('manageusers', 'ManageUsersController');
     Route::get('/requests/approve/{id}', 'RequestsController@approve')->name('approverequest');
+    Route::get('/requests/decline/{id}', 'RequestsController@decline')->name('declinerequest');
     Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');

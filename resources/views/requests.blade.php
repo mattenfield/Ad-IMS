@@ -86,6 +86,9 @@
             {
                 $approval = "Approved";
             }
+            else if($row['approved']===0){
+                $approval = "Declined";
+            }
             else{
                 $approval = "Pending";
             }
@@ -97,8 +100,12 @@
                 <td>{{$row['created_at']}}</td>
                 <td>{{$row['requestbyname']}}</td>
                 <td><?=$approval?></td>
-                <td>@if(@$row['approved']==null&&@$auth_level==1)<a class="btn btn-success" onclick="return confirm('Are you sure you wish to approve this?')" href="/requests/approve/{{$row['id']}}">Approve</a>@endif
-                <a style="margin:5px;" class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/requests/delete/{{$row['id']}}">Delete</a></td>
+                <td>
+                @if($row['approved']===null&&$auth_level==1)<a style="margin:5px;" class="btn btn-success" onclick="return confirm('Are you sure you wish to approve this?')" href="/requests/approve/{{$row['id']}}">Approve</a> <br/>
+                <a style="margin:5px;" class="btn btn-warning" onclick="return confirm('Are you sure you wish to decline this?')" href="/requests/decline/{{$row['id']}}">Decline</a>
+                    @endif
+                <a style="margin:5px;" class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/requests/delete/{{$row['id']}}">Delete</a
+                ></td>
             </tr>
             @endforeach
             </table>

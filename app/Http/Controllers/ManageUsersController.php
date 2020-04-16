@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 
 class ManageUsersController extends Controller
 {
@@ -64,7 +65,20 @@ class ManageUsersController extends Controller
                 'user_level' =>$request->get('user_level')
             ]);
 
+        $userarray = array(
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+            'user_level' =>$request->get('user_level')
+        );
+
         $user->save();
+      
+        Mail::send('newusermail', $userarray, function ($m) use ($user) {
+            $m->from('noreply-adims@acoding.ninja', 'AD-IMS');
+
+            $m->to($user->email, $user->name)->subject('User Created');
+        });
         return redirect()->route('manageusers')->with('success','User was successfully created.');
        
              
@@ -121,6 +135,11 @@ class ManageUsersController extends Controller
             $this->validate($request, ['password' => ['required', 'string', 'min:8', 'confirmed']]);
             $user->password = Hash::make($request->get('password'));
             $user->save();
+            Mail::send('mailpasswordchange', array(), function ($m) use ($currentuser) {
+                $m->from('noreply-adims@acoding.ninja', 'AD-IMS');
+    
+                $m->to($currentuser->email)->subject('Password Change Notification.');
+            });
             return redirect()->route('changepwd')->with('success','Password was successfully changed.');
         }
         else

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Requests;
 use App\Item;
+use Mail;
 
 class RequestsController extends Controller
 {
@@ -117,7 +118,7 @@ class RequestsController extends Controller
             'itemDescription' => $request->get('itemDescription'),
             'photoEvidenceUploadLink' => $new_name,
             'uploaded' => true,
-            'requestbyname' => $user->name,
+            'requestbyname' => $user->email,
             'requestbyID' => $user->id,
         ]);
         $request->save();
@@ -156,21 +157,43 @@ class RequestsController extends Controller
         $approvereq = Requests::where('id',$id)->first();
         $approvereq->approved = 1;
         $approvereq->save();
-
+        $email = $approvereq->requestbyname;
+        $data['itemDescription']=$approvereq->itemDescription;
+        $data['id'] = $id;
+        Mail::send('mailaccept', $data, function ($m) use ($email) {
+            $m->from('noreply-adims@acoding.ninja', 'AD-IMS');
+            $m->to($email)->subject('Your request was accepted.');
+        });
         if($approvereq->inventoryID !=null)
-        {
-            $user = auth()->user();
+        {   $user = auth()->user();
+
             $item = new Item ([
             'inventoryID' => $approvereq->inventoryID,
             'itemDescription' => $approvereq->itemDescription,
             'itemScannedBy' => $user->name
             ]);
             $item->save();
+            
             return redirect()->route('requestsview')->with('success','Request successfully approved and uploaded to Inventory.');
         }
         else{
             return redirect()->route('requestsview')->with('success','Request successfully approved.');
         }
+
+    }
+    public function decline($id)
+    {
+        $approvereq = Requests::where('id',$id)->first();
+        $approvereq->approved = 0;
+        $approvereq->save();
+        $email = $approvereq->requestbyname;
+        $data['itemDescription']=$approvereq->itemDescription;
+        $data['id'] = $id;
+        Mail::send('maildecline', $data, function ($m) use ($email) {
+            $m->from('noreply-adims@acoding.ninja', 'AD-IMS');
+            $m->to($email)->subject('Your request unfortunately was declined.');
+        });
+        return redirect()->route('requestsview')->with('success','Request successfully was declined.');
     }
 
     /**

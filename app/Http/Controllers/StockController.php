@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\MissingItems;
+use Mail;
 
 class StockController extends Controller
 {
@@ -117,6 +118,7 @@ class StockController extends Controller
 
     public function completestocktake(Request $request)
     {
+        $user = auth()->user();
         $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID', $request->get('inventoryID'))->get();
         define('constantID', $request->get('inventoryID'));
         $data['missingitemscount'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID', constantID)->count();
@@ -126,6 +128,11 @@ class StockController extends Controller
         if($data['missingitemscount']>0){
             
             $check=array();
+            Mail::send('maildiscrepency', $data, function ($m) use ($user) {
+                $m->from('noreply-adims@acoding.ninja', 'AD-IMS');
+    
+                $m->to($user->email)->subject('Discrepency Report');
+            });
 
             foreach($data['missingitems'] as $m)
             {
