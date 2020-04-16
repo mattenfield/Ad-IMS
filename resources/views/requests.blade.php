@@ -94,7 +94,7 @@
             }
             ?>
             <tr> 
-                <td><img style = "max-width: 500px; max-height: 500px;" src="/images/{{$row['photoEvidenceUploadLink']}}" alt="Evidence Image not found." ></td>
+                <td><img style = "max-width: 500px; max-height: 500px;" src="https://adims.s3.eu-west-2.amazonaws.com/{{$row['photoEvidenceUploadLink']}}" alt="Evidence Image not found." ></td>
                 <td>{{$row['itemDescription']}}</td>
                 <td><?=$inventory?></td>
                 <td>{{$row['created_at']}}</td>

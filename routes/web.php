@@ -12,6 +12,9 @@
 */
 
 Auth::routes(['register' => false]);
+Route::get('/file-config',  function() {
+    return config('filesystems');
+});
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');

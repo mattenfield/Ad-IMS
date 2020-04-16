@@ -109,14 +109,13 @@ class RequestsController extends Controller
             ]);
         
         $image = $request->file('select_file');
-        $new_name = rand().'.'.$image->getClientOriginalExtension();
-        $image->move(public_path("images"), $new_name);
+        $path = $image->store('my_file', 's3');
 
         $user = auth()->user();
         $request = new Requests ([
             'inventoryID' => $invID,
             'itemDescription' => $request->get('itemDescription'),
-            'photoEvidenceUploadLink' => $new_name,
+            'photoEvidenceUploadLink' => $path,
             'uploaded' => true,
             'requestbyname' => $user->email,
             'requestbyID' => $user->id,
