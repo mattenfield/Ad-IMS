@@ -36,6 +36,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('manageusers/delete/{id}', 'ManageUsersController@destroy');
     Route::post('manageusers/create/new', 'ManageUsersController@store')->name('register');
     Route::get('/stock/create', 'StockController@create')->name('stockcreate');
+    Route::post('/stock/create', 'StockController@create')->name('stockcreate');
     Route::get('/stock', 'StockController@index')->name('stock');
     Route::get('/stock/take', 'StockController@take')->name('stocktake');
     Route::get('/stock/mobiletake/{id}', 'StockController@mobiletake')->name('mobilestocktake');

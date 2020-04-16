@@ -157,7 +157,7 @@ class StockController extends Controller
       
         }
         else if ($data['missingitemscount']==0){
-            return redirect()->route('stocktake')->with('success', $temp);
+            return redirect()->route('stocktake')->with('success', 'No stock was left to find.');
         }
 
 
