@@ -1,13 +1,15 @@
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 <H1> Pre-requirements for local installation </H1><br/> 
-Download and Install XAMPP through this link: https://www.apachefriends.org/index.html 
+Download and Install XAMPP through this link: https://www.apachefriends.org/index.html <br/>
+Download and Install Composer from getcomposer.org/ 
 <br/> 
 <H1> How to install this project </H1> <br/>
 1) Download and Install this project into a Zip Folder. <br/>
 2) Extract Files into the C:\xampp\htdocs directory. <br/> 
 3) Open CMD or PowerShell and change to the above directory. CD  C:\xampp\htdocs\Ad-IMS-master <br/>
-4) Run the command 'php artisan serve'. <br/>
+4) Run the command 'composer install'. <br/>
+4) Once all dependencies have installed, run the command 'php artisan serve'. <br/>
 5) Your development server should now be working - please open XAMPP - Start Apache and MySQL. <br/> 
 6) Next go to localhost/phpmyadmin into a browser. Then add a database called Ad-IMS.<br/> 
 7) Next go to the .env.example file- please rename to .env and change the following within: APP_NAME:Ad-IMS and DB_DATABASE: Ad-IMS.<br/>  
