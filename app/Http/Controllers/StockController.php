@@ -360,9 +360,9 @@ class StockController extends Controller
         $item = Item::where('id', $id)->first();
         
             if($item)
-             {   //$this->validate($request, [
-            // '   itemDescription' => ['required']
-            //     ]);   
+             {   $this->validate($request, [
+                'itemDescription' => ['required']
+                ]);   
                 $item->itemDescription = $request->get('itemDescription');
                 $item->inventoryID = $request->get('inventoryID');
                 if($request->file('select_file'))
