@@ -55,7 +55,7 @@
         <table class="table table-bordered">
         <tr>
         @if($auth_level==1) <th> Select </th> @endif
-            <th> QR Code </th>
+            <th> Image </th>
             <th> ID </th>
             <th> Description </th>
             <th> Last Scanned </th>
@@ -66,7 +66,7 @@
             @foreach($items as $row)
             <tr> 
             @if($auth_level==1) <td><input type="checkbox" name="printcheck[]" value="{{$row['id']}}" ></td> @endif
-                <td>{!! QrCode::size(100)->generate("".url('stock/mobiletake')."/".$row['id']); !!}</td>
+                <td><img style = "width: 200px; height: 200px;" src="https://adims.s3.eu-west-2.amazonaws.com/{{$row['photoUploadLink']}}" alt="Photo not Uploaded." ></td>
                 <td>{{$row['id']}}</td>
                 <td>{{$row['itemDescription']}}<input type ="hidden" name="description[]" value="{{$row['itemDescription']}}"></td>
                 <td>{{$row['itemLastScanned']}}</td>
@@ -78,11 +78,11 @@
             {{ $items->links() }}
             @if($auth_level==1)
             <button type="submit" style="margin:5px" class="btn btn-primary">
-                {{ __('Print Selected') }}
+                {{ __('Print Selected QR(s)') }}
             </button>
             
             <a href="/stock/printall" style="margin:5px" class="btn btn-primary">
-                {{ __('Print All') }}
+                {{ __('Print All QRs') }}
             </a>
             </form>
             @endif

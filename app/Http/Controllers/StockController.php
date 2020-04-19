@@ -223,14 +223,24 @@ class StockController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'itemDescription' => 'required'
+            'itemDescription' => 'required',
+            'select_file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
-
+            if($request->file('select_file'))
+            {
+                $image = $request->file('select_file');
+                $path = $image->store('stock', 's3');
+            }
+            else{
+                $path = null;
+            }
+     
         $user = auth()->user();
         $item = new Item ([
             'inventoryID' => $request->get('inventoryID'),
             'itemDescription' => $request->get('itemDescription'),
-            'itemScannedBy' => $user->name
+            'itemScannedBy' => $user->name,
+            'photoUploadLink' => $path
         ]);
         $item->save();
         return redirect()->route('stockcreate')->with('success','Stock was successfully added');
@@ -253,14 +263,14 @@ class StockController extends Controller
     {   
         $i=0;
         $ids = Item::select('id')->get();
-        if($ids)
+        if(count($ids)!=0)
         {
             foreach($ids as $id)
-        {
+            {
             $data['items'][$i] = $id['id'];
             $i++;
-        }
-        return view('stockprint', $data);
+            }
+            return view('stockprint', $data);
         }
         else
         {

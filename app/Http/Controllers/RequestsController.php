@@ -109,7 +109,7 @@ class RequestsController extends Controller
             ]);
         
         $image = $request->file('select_file');
-        $path = $image->store('my_file', 's3');
+        $path = $image->store('evidence', 's3');
 
         $user = auth()->user();
         $request = new Requests ([
