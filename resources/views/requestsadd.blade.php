@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h1>Requests > Create</h1>
+<h1>Expenses Claims > Create</h1>
 </br>
         @if(count($errors) > 0)
         <div class="alert alert-danger">

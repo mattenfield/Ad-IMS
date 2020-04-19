@@ -60,7 +60,7 @@
                                 </div>
                                 <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-nav dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Requests <span class="caret"></span>
+                                    Expenses Claims <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

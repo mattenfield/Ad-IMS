@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Requests</h1>
+    <h1>Expenses Claims</h1>
     </br>
         @if(\Session::has('success'))
         <div class="alert alert-success">
