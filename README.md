@@ -9,14 +9,14 @@ Download and Install Composer from getcomposer.org/
 2) Extract Files into the C:\xampp\htdocs directory. <br/> 
 3) Open CMD or PowerShell and change to the above directory. CD  C:\xampp\htdocs\Ad-IMS-master <br/>
 4) Run the command 'composer install'. <br/>
-4) Once all dependencies have installed, run the command 'php artisan serve'. <br/>
-5) Your development server should now be working - please open XAMPP - Start Apache and MySQL. <br/> 
-6) Next go to localhost/phpmyadmin into a browser. Then add a database called Ad-IMS.<br/> 
-7) Next go to the .env.example file- please rename to .env and change the following within: APP_NAME:Ad-IMS and DB_DATABASE: Ad-IMS.<br/>  
-8) Save that file. <br/> 
-9) Now run migrations by running the command 'php artisan migrate'.<br/> 
-10) You should now be able to access the application - but you will not have image upload capabilities as this requires a S3 bucket.<br/> 
-11) Go to 127.0.0.1:8000 to serve the application. <br/> 
+5) Once all dependencies have installed, run the command 'php artisan serve'. <br/>
+6) Your development server should now be working - please open XAMPP - Start Apache and MySQL. <br/> 
+7) Next go to localhost/phpmyadmin into a browser. Then add a database called Ad-IMS.<br/> 
+8) Next go to the .env.example file- please rename to .env and change the following within: APP_NAME:Ad-IMS and DB_DATABASE: Ad-IMS.<br/>  
+9) Save that file. <br/> 
+10) Now run migrations by running the command 'php artisan migrate'.<br/> 
+11) You should now be able to access the application - but you will not have image upload capabilities as this requires a S3 bucket.<br/> 
+12) Go to 127.0.0.1:8000 to serve the application. <br/> 
 <br/> 
 The default credentials are below:
 <br/> 
