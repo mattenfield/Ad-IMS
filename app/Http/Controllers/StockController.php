@@ -77,7 +77,11 @@ class StockController extends Controller
     }
 
     public function checkitem(Request $request)
-    {
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+
         $user = auth()->user();
         $checkitem = Item::where('id',$request->get('qrCode'))->first();
 
@@ -97,9 +101,9 @@ class StockController extends Controller
     }
     public function mobiletake($id)
     {
-        if($id==null)
+        if(count($request->all()) == 0)
         {
-            return redirect()->route('stock')->with('error','You have not scanned an item.');
+            return redirect()->route('home');
         }
         $user = auth()->user();
         $checkitem = Item::where('id',$id)->first();
@@ -117,7 +121,11 @@ class StockController extends Controller
 }
 
     public function completestocktake(Request $request)
-    {
+    {  
+        if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
         $user = auth()->user();
         $data['missingitems'] = Item::where('itemlastScanned','!=', gmdate('Y-m-d'))->where('inventoryID', $request->get('inventoryID'))->get();
         define('constantID', $request->get('inventoryID'));
@@ -208,7 +216,11 @@ class StockController extends Controller
  
 
     public function search(Request $request)
-    {   $data['auth_level'] = auth()->user()->user_level;
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        $data['auth_level'] = auth()->user()->user_level;
         $search = $request->get('search');
         $data['items'] = Item::where('itemDescription', 'like', '%'.$search.'%')->Paginate(5);
         return view('stock', $data);
@@ -221,7 +233,10 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
         $this->validate($request, [
             'itemDescription' => 'required',
             'select_file' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -247,7 +262,10 @@ class StockController extends Controller
 
     }
     public function print(Request $request)
-    {   
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
         $data['items'] = $request->get('printcheck');
         if($data['items']!=null)
         {
@@ -298,7 +316,32 @@ class StockController extends Controller
      */
     public function edit($id)
     {
-        //
+
+            $data['item'] = Item::find($id);
+            if($data['item']!=null)
+            {
+                if($data['item']['inventoryID']==1)
+                {
+                    $data['selected1']="selected='selected'";
+                }
+                else if($data['item']['inventoryID']==2)
+                {
+                    $data['selected2']="selected='selected'";
+                }
+                else if($data['item']['inventoryID']==3)
+                {
+                    $data['selected3']="selected='selected'";
+                }
+                else if($data['item']['inventoryID']==4)
+                {
+                    $data['selected4']="selected='selected'";
+                }
+                return view('stockedit', $data);
+            }
+            else
+            {
+                return redirect()->route('stock')->with('error','No item to edit.');
+            }       
     }
 
     /**
@@ -310,7 +353,32 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        $item = Item::where('id', $id)->first();
+        
+            if($item)
+             {   //$this->validate($request, [
+            // '   itemDescription' => ['required']
+            //     ]);   
+                $item->itemDescription = $request->get('itemDescription');
+                $item->inventoryID = $request->get('inventoryID');
+                if($request->file('select_file'))
+                {   
+                    $this->validate($request, ['select_file' => 'image|mimes:jpeg,png,jpg,gif|max:2048']);
+                    $image = $request->file('select_file');
+                    $path = $image->store('stock', 's3');
+
+                    $item->photoUploadLink = $path;
+                }
+                $item->save();
+                return redirect()->route('stock')->with('success','Stock was successfully updated.');
+            }
+            else{
+                return redirect()->route('stock')->with('error','Unfortunately an error has occurred.');
+            }
     }
 
     /**

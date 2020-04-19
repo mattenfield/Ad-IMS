@@ -29,11 +29,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');
     Route::post('manageusers/edit/{id}', 'ManageUsersController@edit');
+    Route::get('manageusers/edit/update/{id}', 'ManageUsersController@edit');
     Route::post('manageusers/edit/update/{id}', 'ManageUsersController@update');
     Route::get('manageusers/delete/{id}', 'ManageUsersController@destroy');
     Route::post('manageusers/create/new', 'ManageUsersController@store')->name('register');
+    Route::get('manageusers/create/new', 'ManageUsersController@create')->name('registerview');
     Route::get('/stock/create', 'StockController@create')->name('stockcreate');
     Route::post('/stock/create', 'StockController@create')->name('stockcreate');
+    Route::get('/stock/edit/{id}', 'StockController@edit')->name('stockeditview');
+    Route::get('/stock/edit/store/{id}', 'StockController@edit')->name('stockeditviewstore');
+    Route::post('/stock/edit/store/{id}', 'StockController@update')->name('stockedit');
     Route::get('/stock', 'StockController@index')->name('stock');
     Route::get('/stock/take', 'StockController@take')->name('stocktake');
     Route::get('/stock/mobiletake/{id}', 'StockController@mobiletake')->name('mobilestocktake');
@@ -44,6 +49,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/changepassword', 'ManageUsersController@changepassword')->name('changepwd');
+    Route::get('/changepassword/store', 'ManageUsersController@changepassword')->name('changepwdstoreview');
     Route::post('/changepassword/store', 'ManageUsersController@changepasswordstore')->name('changepwdstore');
     Route::get('/stock/search', 'StockController@search')->name('search');
     Route::get('/', function () {

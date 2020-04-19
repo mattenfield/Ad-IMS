@@ -94,7 +94,12 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+
         if($request->get('inventoryID')==0)
         {
             $invID = null;
@@ -136,7 +141,11 @@ class RequestsController extends Controller
     }
 
     public function search(Request $request)
-    {   $data['auth_level'] = auth()->user()->user_level;
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        $data['auth_level'] = auth()->user()->user_level;
         $search = $request->get('search');
 
         if($data['auth_level']==1)

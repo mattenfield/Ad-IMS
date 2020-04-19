@@ -71,7 +71,8 @@
                 <td>{{$row['itemDescription']}}<input type ="hidden" name="description[]" value="{{$row['itemDescription']}}"></td>
                 <td>{{$row['itemLastScanned']}}</td>
                 <td>{{$row['itemScannedBy']}}</td>
-            @if($auth_level==1)    <td><a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td> @endif
+            @if($auth_level==1)    <td><a style="margin:5px" class="btn btn-primary" href="/stock/edit/{{$row['id']}}">Edit</a><br/>
+            <a class="btn btn-danger delete" onclick="return confirm('Are you sure you wish to delete this?')" href="/stock/delete/{{$row['id']}}">Delete</a></td> @endif
             </tr>
             @endforeach
             </table>

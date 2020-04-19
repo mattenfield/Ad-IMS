@@ -24,7 +24,11 @@ class ManageUsersController extends Controller
     }
 
     public function search(Request $request)
-    {   $user = auth()->user();
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        $user = auth()->user();
         $search = $request->get('search');
         $data['users'] = User::where('name', 'like', '%'.$search.'%')->where('id','!=', $user->id)->Paginate(5);
         return view('manageusers', $data);
@@ -52,8 +56,12 @@ class ManageUsersController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function store(request $request ) 
-    {   $this->validate($request, [
+    protected function store(request $request) 
+    {   if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -106,15 +114,23 @@ class ManageUsersController extends Controller
 
         if($id!=$user->id){
             $data['user'] = User::find($id);
-            if($data['user']['user_level']==0)
+            if($data['user'])
             {
-                $data['selected0']="selected='selected'";
+                if($data['user']['user_level']==0)
+                {
+                    $data['selected0']="selected='selected'";
+                }
+                else if($data['user']['user_level']==1)
+                {
+                    $data['selected1']="selected='selected'";
+                }
+                return view('auth/edit', $data);
             }
-            else if($data['user']['user_level']==1)
+            else
             {
-                $data['selected1']="selected='selected'";
+                return redirect()->route('manageusers')->with('error','No user to edit.');
             }
-            return view('auth/edit', $data);
+           
         }
         else{
             return redirect()->route('manageusers')->with('error','You cannot edit your own account in this section.');
@@ -128,7 +144,12 @@ class ManageUsersController extends Controller
     }
 
     public function changepasswordstore(request $request)
-    {   $currentuser = auth()->user();
+    {  if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
+        
+        $currentuser = auth()->user();
         if($currentuser)
         {
             $user = User::where('id', $currentuser->id)->first();
@@ -157,7 +178,11 @@ class ManageUsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {  
+        if(count($request->all()) == 0)
+        {
+            return redirect()->route('home');
+        }
         $user = User::where('id', $id)->first();
         
             if($user)
