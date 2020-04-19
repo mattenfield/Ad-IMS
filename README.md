@@ -1,10 +1,23 @@
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
+# Pre-requirements for local installation <br/>
+Download and Install XAMPP through this link: https://www.apachefriends.org/index.html 
+<br/> 
 # How to install this project 
-<p> Run project by using the PHP Artisan Development Server - the command 'php artisan serve' will do this. 
-Next you must run a MySQL Local Client - e.g. XAMPP. Once both of these are running correctly, you should now be able to serve the application. The default credentials are below:
-
+1) Download and Install this project into a Zip Folder. <br/>
+2) Extract Files into the C:\xampp\htdocs directory. <br/> 
+3) Open CMD or PowerShell and change to the above directory. CD  C:\xampp\htdocs\Ad-IMS-master <br/>
+4) Run the command 'php artisan serve'. <br/>
+5) Your development server should now be working - please open XAMPP - Start Apache and MySQL. <br/> 
+6) Next go to localhost/phpmyadmin into a browser. Then add a database called Ad-IMS.<br/> 
+7) Next go to the .env.example file- please rename to .env and change the following within: APP_NAME:Ad-IMS and DB_DATABASE: Ad-IMS.<br/>  
+8) Save that file. <br/> 
+9) Now run migrations by running the command 'php artisan migrate'.<br/> 
+10) You should now be able to access the application - but you will not have image upload capabilities as this requires a S3 bucket.<br/> 
+11) Go to 127.0.0.1:8000 to serve the application. <br/> 
+<br/> <br/> 
+The default credentials are below:
+<br/> 
 ## You must change these credentials upon first log-in BEFORE deployment. 
 User: superuser@adims.com <br/>
 Password: changeme!
