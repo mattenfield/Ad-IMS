@@ -101,10 +101,6 @@ class StockController extends Controller
     }
     public function mobiletake($id)
     {
-        if(count($request->all()) == 0)
-        {
-            return redirect()->route('home');
-        }
         $user = auth()->user();
         $checkitem = Item::where('id',$id)->first();
 
