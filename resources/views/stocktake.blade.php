@@ -20,7 +20,7 @@
     <div class="row justify-content-center">
       
         <div class="col-md-8">
-        <div class="row justify-content-center">
+        <div style="text-align:center;" class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Check Stock') }}</div>
@@ -33,7 +33,7 @@
                             <label for="qrCode" class="col-md-4 col-form-label text-md-right">{{ __('QR Code') }}</label>
 
                             
-                            <input type="text" id="qrCode" name = "qrCode" rows="4" cols="26" required>
+                            <input  style="margin : 0 auto;" type="text" id="qrCode" name = "qrCode" rows="4" cols="26" required>
                             
                         </div>
                         <div class="form-group row mb-0 ">
@@ -51,7 +51,7 @@
                         <div class="form-group row">
                             <label for="inventoryID" class="col-md-4 col-form-label text-md-right">{{ __('Inventory') }}</label>
                             
-                            <select name="inventoryID">
+                            <select  style="margin : 0 auto;" name="inventoryID">
                                 <option value="1">Technical Equipment</option>
                                 <option value="2">Costumes</option>
                                 <option value="3">Tools</option>

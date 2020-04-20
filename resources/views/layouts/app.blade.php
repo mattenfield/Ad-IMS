@@ -54,12 +54,20 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/stock/">View Items</a>
-                                    <a class="dropdown-item" href="/stock/create">Add Items</a>
+                                    @if(auth()->user()->user_level == 1)<a class="dropdown-item" href="/stock/create">Add Items</a>
                                     <a class="dropdown-item" href="/stock/take">Stock Take</a>
-                                    <a class="dropdown-item" href="/stock/missing">Missing Items</a>
+                                    <a class="dropdown-item" href="/stock/missing">Missing Items</a> @endif
                                 </div>
-                                <!-- <li><a href="/requests">Requests</a></li> -->
-                                <li><a href="/manageusers">Manage Users</a></li>
+                                <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-nav dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Expenses Claims <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/requests/">View Requests</a>
+                                    <a class="dropdown-item" href="/requests/create">Add Requests</a>
+                                </div>
+                                @if(auth()->user()->user_level == 1)<li><a href="/manageusers">Manage Users</a></li>@endif
                             </ul>
                             <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
