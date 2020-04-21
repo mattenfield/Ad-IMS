@@ -50,7 +50,7 @@
                             <label for="itemDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             
-                            <textarea  id="itemDescription" name = "itemDescription" rows="4" cols="26" required></textarea>
+                            <textarea placeholder="Please be as specific as possible to aid identification of the product." id="itemDescription" name = "itemDescription" rows="4" cols="26" required></textarea>
                             
                         </div>
                         <div class="form-group row">
