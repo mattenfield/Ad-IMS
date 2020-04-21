@@ -4,7 +4,9 @@
 <div class="container">
     <h1 style="font-size:60px;">Welcome to your dashboard, {{Auth::user()->name}}.</h1>
     </br>
+    
     <div class="row justify-content-center">
+    <h4 style="text-align:center;">New Users are reminded to reset their password on first login. <br/><a style ="font-weight:bold;"href="{{url('changepassword')}}"> Click here </a> to change your password.</h4>
       <img src="dashboard_img.jpg" width="600" height="400px" >
     </div>
     </br>
