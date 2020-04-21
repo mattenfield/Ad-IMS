@@ -27,7 +27,7 @@ class RequestsController extends Controller
                 else if($data['approve']==1)
                 {
                     $data['selected1']="selected='selected'";
-                    $data['requests'] = Requests::where('approved', null)->Paginate(5);
+                    $data['requests'] = Requests::where('approved', 0)->Paginate(5);
                 }
                 else if($data['approve']==2)
                 {
@@ -36,12 +36,12 @@ class RequestsController extends Controller
                 }
                 else
                 {
-                    $data['selected0']="selected='selected'";
-                    $data['requests'] = Requests::Paginate(5);
+                    $data['selected3']="selected='selected'";
+                    $data['requests'] = Requests::where('approved', null)->Paginate(5);
                 }
         }
         else if(isset($_GET['approval'])&&$data['auth_level']==0)
-        {
+        {   $data['approve'] = $_GET['approval'];
             if($data['approve']==0)
             {
                 $data['selected0']="selected='selected'";
@@ -50,17 +50,17 @@ class RequestsController extends Controller
             else if($data['approve']==1)
             {
                 $data['selected1']="selected='selected'";
-                $data['requests'] = Requests::where('approved', null)->where('requestbyID', auth()->user()->id)->Paginate(5);
+                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->where('approved', 0)->Paginate(5);
             }
             else if($data['approve']==2)
             {
                 $data['selected2']="selected='selected'";
-                $data['requests'] = Requests::where('approved', 1)->where('requestbyID', auth()->user()->id)->Paginate(5);
+                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->where('approved', 1)->Paginate(5);
             }
             else
             {
-                $data['selected0']="selected='selected'";
-                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->Paginate(5);
+                $data['selected3']="selected='selected'";
+                $data['requests'] = Requests::where('requestbyID', auth()->user()->id)->where('approved', null)->Paginate(5);
             }
         }
         else if(!isset($_GET['approval'])&&$data['auth_level']==1)
