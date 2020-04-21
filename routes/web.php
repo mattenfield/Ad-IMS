@@ -26,7 +26,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/requests/approve/{id}', 'RequestsController@approve')->name('approverequest');
     Route::get('/requests/decline/{id}', 'RequestsController@decline')->name('declinerequest');
     Route::get('/manageusers', 'ManageUsersController@index')->name('manageusers');
-    Route::get('/manageusers/search', 'ManageUsersController@search')->name('managesearch');
     Route::get('manageusers/edit/{id}', 'ManageUsersController@edit');
     Route::post('manageusers/edit/{id}', 'ManageUsersController@edit');
     Route::get('manageusers/edit/update/{id}', 'ManageUsersController@edit');
@@ -44,17 +43,18 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/stock/mobiletake/{id}', 'StockController@mobiletake')->name('mobilestocktake');
     Route::get('/stock/found/{id}','StockController@found');
     Route::get('/stock/delete/{id}','StockController@destroy');
+    Route::get('/stock/search', 'StockController@search')->name('search');
     Route::resource('stock', 'StockController');
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
     Route::get('/changepassword', 'ManageUsersController@changepassword')->name('changepwd');
     Route::get('/changepassword/store', 'ManageUsersController@changepassword')->name('changepwdstoreview');
     Route::post('/changepassword/store', 'ManageUsersController@changepasswordstore')->name('changepwdstore');
     Route::get('/stock/search', 'StockController@search')->name('search');
-    Route::get('/', function () {
-        return redirect()->route('home');
-    });
     Route::get('/requests/search/', 'RequestsController@search')->name('searchrequests');
     Route::resource('requests', 'RequestsController');
     Route::get('/requests', 'RequestsController@index')->name('requestsview');
