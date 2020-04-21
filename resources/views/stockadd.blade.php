@@ -54,7 +54,7 @@
                             
                         </div>
                         <div class="form-group row">
-                            <label for="select_file" class="col-md-4 col-form-label text-md-right">{{ __('Upload Evidence') }}</label>
+                            <label for="select_file" class="col-md-4 col-form-label text-md-right">{{ __('Upload Photo') }}</label>
 
                             
                             <input  type="file" name = "select_file">
