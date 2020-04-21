@@ -63,7 +63,7 @@
                     
                         <div class="form-group row mb-0 ">
                             <div class="col-md-6 offset-md-4 justify-content-center">
-                                <button type="submit" onclick="confirm('Are you sure you want to complete this Stock Take?')"class="btn btn-success">
+                                <button type="submit" onclick="return confirm('Are you sure you want to complete this Stock Take?')"class="btn btn-success delete">
                                     {{ __('Complete') }}
                                 </button>
                             </div>
