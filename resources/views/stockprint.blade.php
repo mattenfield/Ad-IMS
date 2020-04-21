@@ -32,7 +32,7 @@
             @csrf
             @foreach($items as $row)
             <tr> 
-                <td>{!! QrCode::size(200)->generate("".$row); !!}<br/> <p style="text-align:center;">{{$row}}</p></td>
+                <td>{!! QrCode::size(200)->generate(url('stock/mobiletake')."/".$row); !!}<br/> <p style="text-align:center;">{{$row}}</p></td>
             </tr>
             @endforeach
             </table>

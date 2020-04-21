@@ -26,12 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $items = Item::all();
-        $missingitems = MissingItems::all();
-        $requests = Requests::all();
+        $data['auth_level'] = auth()->user()->user_level;
+
+        if($data['auth_level']==1)
+        {   
+            $items = Item::all();
+            $missingitems = MissingItems::all();
+            $requests = Requests::all();
+            $data['missingitemscount'] = count($missingitems);
+        }
+        else
+        {
+            $items = Item::all();
+            $requests = Requests::where('requestbyID',auth()->user()->id)->get();
+        }
+        
 
         $data['itemcount'] = count($items);
-        $data['missingitemscount'] = count($missingitems);
         $data['requestcount'] = count($requests);
 
         return view('dashboard', $data);

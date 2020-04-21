@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Requests extends Model
 {
-    protected $fillable = ['itemDescription, iventoryID, uploaded, approved'];
+    protected $fillable = ['itemDescription', 'inventoryID', 'photoEvidenceUploadLink', 'uploaded', 'approved', 'requestbyname', 'requestbyID'];
 }

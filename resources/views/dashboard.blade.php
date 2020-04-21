@@ -8,20 +8,28 @@
       <img src="dashboard_img.jpg" width="600" height="400px" >
     </div>
     </br>
-    <p style="font-weight: bold;text-align:center;">In order to add an item, please select Stock > Add Items and enter the relevant information.</p> 
+    @if($auth_level==1)
+    <h4 style="font-weight: bold;text-align:center;">Administration Portal: Full Functionality</h4> 
+    @endif
+
+    @if($auth_level==0)
+    <h4 style="font-weight: bold;text-align:center;">You can make Expense Requests and view our Stock Inventory.</h4> 
+    @endif
     </br>
     <div class="row justify-content-center">
             <div style="font-size: 30px; text-align:center;" class="col-sm-3">
               <h1 style="font-size:100px;">{{$itemcount ?? ''}}</h1>
                 <a href="/stock">Total Items</a>
             </div>
+            @if($auth_level==1)
             <div style="font-size: 30px; text-align:center;" class="col-sm-3">
               <h1 style="font-size:100px;">{{$missingitemscount ?? ''}}</h1>
               <a href="/stock/missing">Missing Items</a>
             </div>
-            <!-- <div style="font-size: 30px; text-align:center;" class="col-sm-3">
+            @endif
+            <div style="font-size: 30px; text-align:center;" class="col-sm-3">
               <h1 style="font-size:100px;">{{$requestcount ?? ''}}</h1>
               <a href="/requests"> Requests</a>
-            </div> -->
+            </div>
 
 @endsection
