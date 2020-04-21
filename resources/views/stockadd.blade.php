@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h1>Stock > Add</h1>
+<h1><a href="{{url('stock')}}">Stock</a> > Add</h1>
 </br>
         @if(count($errors) > 0)
         <div class="alert alert-danger">

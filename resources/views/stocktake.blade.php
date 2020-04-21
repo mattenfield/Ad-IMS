@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h1>Stock > Stock Check</h1>
+<h1><a href="{{url('stock')}}">Stock</a> > Stock Check</h1>
 </br>
         @if(\Session::has('error'))
         <div class="alert alert-danger">
