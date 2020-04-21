@@ -22,8 +22,9 @@
                             <label for="approval" class="col-md-4 col-form-label text-md-right">{{ __('Filter Requests') }}</label>
                             <select name="approval">
                                 <option <?=$selected0 ?? ''?>value="0">All</option>
-                                <option <?=$selected1 ?? ''?>value="1">Not Approved</option>
+                                <option <?=$selected1 ?? ''?>value="1">Declined</option>
                                 <option <?=$selected2 ?? ''?>value="2">Approved</option>
+                                <option <?=$selected3 ?? ''?>value="3">Pending</option>
                         </select>
                         <button type="submit" style="margin:5px" class="btn btn-primary">
                                     {{ __('Load') }}

@@ -72,7 +72,10 @@
                                 
                                 <div style="text-align:center">
                                 </br></br>
-                                Please enter your username and password provided by your system administrator. Any queries please contact the following email address: ims@holmergreenplayers.co.uk.
+                                Please enter your username and password provided by your system administrator. If you believe you should have access to this system please email the following email address;
+                                <a href="mailto:ims@holmergreenplayers.co.uk">ims@holmergreenplayers.co.uk</a>
+                                </br></br>
+                                For General Enquiries about Holmer Green Players, please <a href="http://www.holmergreenplayers.info/about-us/"> click here </a> to visit our website. 
                                 </div>
                           
                         </div>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-<h1>Stock > Add</h1>
+<h1><a href="{{url('stock')}}">Stock</a> > Add</h1>
 </br>
         @if(count($errors) > 0)
         <div class="alert alert-danger">
@@ -50,11 +50,11 @@
                             <label for="itemDescription" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                             
-                            <textarea  id="itemDescription" name = "itemDescription" rows="4" cols="26" required></textarea>
+                            <textarea placeholder="Please be as specific as possible to aid identification of the product." id="itemDescription" name = "itemDescription" rows="4" cols="26" required></textarea>
                             
                         </div>
                         <div class="form-group row">
-                            <label for="select_file" class="col-md-4 col-form-label text-md-right">{{ __('Upload Evidence') }}</label>
+                            <label for="select_file" class="col-md-4 col-form-label text-md-right">{{ __('Upload Photo') }}</label>
 
                             
                             <input  type="file" name = "select_file">
